@@ -66,7 +66,7 @@ Material:
     m_Colors:
     - _FlowAxis: {r: 1, g: 0, b: 0, a: 0}
     - _FlowDir: {r: 0, g: 0, b: 1, a: 0}
-    - _LineColor: {r: 1.9766747, g: 1.7112533, b: 0.38414612, a: 1}
+    - _LineColor: {r: 2.9960783, g: 2.5937748, b: 0.5822566, a: 1}
     - _WindColor: {r: 0.4113207, g: 0.3516986, b: 0.07062298, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
