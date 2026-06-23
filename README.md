@@ -1,4 +1,4 @@
-# Vertigo Games — Technical Artist Demo
+# Vertigo Games — Eray Yeşilyurt- Technical Artist Case
 
 scroll edilebilir Battle Pass ekranı ve bir silah VFX'i.
 Unity 6000.0.73f1 URP ve 1920x1080 resolution'ında geliştirildi.
