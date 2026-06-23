@@ -28,6 +28,7 @@ public class BattlePassNode : MonoBehaviour, IPointerClickHandler
     [Header("Overlays")]
     public GameObject lockedVisual;
     public GameObject redDot;
+    public GameObject shine;
 
     [Header("Claim pop")]
     public float popScale = 1.15f;
@@ -171,6 +172,7 @@ public class BattlePassNode : MonoBehaviour, IPointerClickHandler
 
         if (lockedVisual != null) lockedVisual.SetActive(state == State.Locked || premiumLock);
         if (redDot != null) redDot.SetActive(state == State.Claimable);
+        if (shine != null) shine.SetActive(state == State.Claimable);
     }
 
 #if UNITY_EDITOR

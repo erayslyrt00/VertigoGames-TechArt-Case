@@ -37,13 +37,12 @@ public class LevelProgressBar : MonoBehaviour
         CollectNodes();
         CacheFollowerOffsets();
         RefreshStates();
-        StartCoroutine(AlignWhenLaidOut());
-    }
 
-    // wait a frame so the layout group places the columns before reading their world positions
-    IEnumerator AlignWhenLaidOut()
-    {
-        yield return null;
+        if (content != null)
+        {
+            Canvas.ForceUpdateCanvases();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(content);
+        }
 
         if (fill != null && bar != null && buyButton != null)
         {

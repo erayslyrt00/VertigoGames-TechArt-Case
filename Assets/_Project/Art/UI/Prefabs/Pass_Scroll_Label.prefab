@@ -699,6 +699,7 @@ MonoBehaviour:
   claimedVisual: {fileID: 6238145389602457959}
   lockedVisual: {fileID: 0}
   redDot: {fileID: 913256570003570272}
+  shine: {fileID: 0}
   popScale: 1.15
   popDuration: 0.25
   shakeAngle: 6
@@ -1644,6 +1645,7 @@ MonoBehaviour:
   claimedVisual: {fileID: 8630781948723134305}
   lockedVisual: {fileID: 4598332592219178515}
   redDot: {fileID: 136061611255653753}
+  shine: {fileID: 246652694069683579}
   popScale: 1.15
   popDuration: 0.25
   shakeAngle: 6

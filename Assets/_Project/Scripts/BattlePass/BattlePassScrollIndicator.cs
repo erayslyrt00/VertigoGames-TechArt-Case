@@ -69,6 +69,13 @@ public class BattlePassScrollIndicator : MonoBehaviour
     void Start()
     {
         CollectNodes();
+
+        if (content != null)
+        {
+            Canvas.ForceUpdateCanvases();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(content);
+        }
+
         UpdateLabels();
     }
 
@@ -180,15 +187,16 @@ public class BattlePassScrollIndicator : MonoBehaviour
         if (rt == null || viewport == null) return View.Visible;
 
         rt.GetWorldCorners(corners);
-        float center = (corners[0].x + corners[3].x) * 0.5f;
+        float markerLeft = corners[0].x;
+        float markerRight = corners[3].x;
 
         viewport.GetWorldCorners(corners);
         float viewLeft = corners[0].x;
         float viewRight = corners[3].x;
         float width = viewRight - viewLeft;
 
-        if (center < viewLeft + leftMargin * width) return View.OffLeft;
-        if (center > viewRight - rightMargin * width) return View.OffRight;
+        if (markerRight < viewLeft + leftMargin * width) return View.OffLeft;
+        if (markerLeft > viewRight - rightMargin * width) return View.OffRight;
         return View.Visible;
     }
 
