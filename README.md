@@ -1,6 +1,6 @@
 # Vertigo Games — Technical Artist Demo
 
-İki parçalı bir demo: scroll edilebilir bir Battle Pass ekranı ve bir silah VFX'i.
+scroll edilebilir Battle Pass ekranı ve bir silah VFX'i.
 Unity 6000.0.73f1 URP ve 1920x1080 resolution'ında geliştirildi.
 
 Projeyi açtıktan sonra iki adet sahne var:
