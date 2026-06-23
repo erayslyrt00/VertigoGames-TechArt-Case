@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI_ScrollingTextureWithGlow
+  m_Name: Premium_pass_background
   m_Shader: {fileID: 4800000, guid: b740c66a6fe81e9429b0a5f896f54234, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -53,12 +53,12 @@ Material:
     - _StencilWriteMask: 255
     - _TileX: 4
     - _TileY: 4
-    - _VignetteSoftness: 0.156
-    - _VignetteStrength: 0.405
+    - _VignetteSoftness: 0.01
+    - _VignetteStrength: 0.652
     m_Colors:
-    - _Color: {r: 0.39706182, g: 0, b: 1, a: 1}
-    - _GlowCenter: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _GlowColor: {r: 0, g: 0.10296564, b: 0.49411765, a: 1}
+    - _Color: {r: 0.43529412, g: 0, b: 0.0886657, a: 1}
+    - _GlowCenter: {r: 0.5, g: 0.4, b: 0, a: 0}
+    - _GlowColor: {r: 0.6603774, g: 0.039193507, b: 0, a: 1}
     - _PatternColor: {r: 1, g: 1, b: 1, a: 1}
     - _ScrollSpeed: {r: 0.01, g: -0.16, b: 0, a: 0}
     - _Tiling: {r: 7.81, g: 6, b: 0, a: 0}

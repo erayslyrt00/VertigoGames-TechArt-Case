@@ -22,13 +22,6 @@ Shader "UI/ScrollingTextureWithGlow"
         [Header(Vignette)]
         _VignetteStrength ("Vignette Strength", Range(0, 1)) = 0.35
         _VignetteSoftness ("Vignette Softness", Range(0.01, 1)) = 0.6
-
-        _StencilComp ("Stencil Comparison", Float) = 8
-        _Stencil ("Stencil ID", Float) = 0
-        _StencilOp ("Stencil Operation", Float) = 0
-        _StencilWriteMask ("Stencil Write Mask", Float) = 255
-        _StencilReadMask ("Stencil Read Mask", Float) = 255
-        _ColorMask ("Color Mask", Float) = 15
     }
 
     SubShader
@@ -42,30 +35,17 @@ Shader "UI/ScrollingTextureWithGlow"
             "CanUseSpriteAtlas" = "True"
         }
 
-        Stencil
-        {
-            Ref [_Stencil]
-            Comp [_StencilComp]
-            Pass [_StencilOp]
-            ReadMask [_StencilReadMask]
-            WriteMask [_StencilWriteMask]
-        }
-
         Blend SrcAlpha OneMinusSrcAlpha
         Cull Off
         ZWrite Off
         ZTest [unity_GUIZTestMode]
-        ColorMask [_ColorMask]
 
         Pass
         {
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
-            #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
             #include "UnityCG.cginc"
-            #include "UnityUI.cginc"
 
             struct appdata
             {
@@ -76,10 +56,9 @@ Shader "UI/ScrollingTextureWithGlow"
 
             struct v2f
             {
-                float4 vertex   : SV_POSITION;
-                float2 uv       : TEXCOORD0;
-                float4 color    : COLOR;
-                float4 worldPos : TEXCOORD1;
+                float4 vertex : SV_POSITION;
+                float2 uv     : TEXCOORD0;
+                float4 color  : COLOR;
             };
 
             sampler2D _PatternTex;
@@ -95,21 +74,19 @@ Shader "UI/ScrollingTextureWithGlow"
             float4 _GlowCenter;
             float  _VignetteStrength;
             float  _VignetteSoftness;
-            float4 _ClipRect;
 
             v2f vert(appdata v)
             {
                 v2f o;
-                o.worldPos = v.vertex;
-                o.vertex   = UnityObjectToClipPos(o.worldPos);
-                o.uv       = v.uv;
-                o.color    = v.color;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv     = v.uv;
+                o.color  = v.color;
                 return o;
             }
 
             fixed4 frag(v2f i) : SV_Target
             {
-                float aspect = _ScreenParams.x / _ScreenParams.y;
+                float aspect = abs(ddy(i.uv.y)) / max(abs(ddx(i.uv.x)), 1e-6);
 
                 float2 p = i.uv - 0.5;
                 p.x *= aspect;
@@ -134,17 +111,7 @@ Shader "UI/ScrollingTextureWithGlow"
                 float vignette = 1.0 - smoothstep(_VignetteSoftness, 1.0, length(vd)) * _VignetteStrength;
                 col *= vignette;
 
-                fixed4 outColor = fixed4(col * i.color.rgb, i.color.a);
-
-                #ifdef UNITY_UI_CLIP_RECT
-                outColor.a *= UnityGet2DClipping(i.worldPos.xy, _ClipRect);
-                #endif
-
-                #ifdef UNITY_UI_ALPHACLIP
-                clip(outColor.a - 0.001);
-                #endif
-
-                return outColor;
+                return fixed4(col * i.color.rgb, i.color.a);
             }
             ENDCG
         }
