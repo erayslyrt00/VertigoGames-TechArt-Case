@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c166c6201d2dd82499c2f8de784585e3
+guid: c5301dab8cd4b114884e8bfdaceb0a44
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -21,7 +21,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -50,7 +50,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,45 +110,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Left_Gradient
+      name: Emoji_Diamond
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 128
-        height: 256
+        y: 163
+        width: 162
+        height: 162
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 531ff16ffec6dce40ac22c63e637ae2c
-      internalID: 1748781248
+      spriteID: 258b1078026a3bc44b632bd5382095a0
+      internalID: -1299019971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right_Gradient
+      name: Emoji_Emerald
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
-        height: 256
+        x: 162
+        y: 163
+        width: 162
+        height: 162
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d53bf2b5c7d8f324792101a7322414cf
-      internalID: -1187006019
+      spriteID: 9af74e6c805bafd49a6a1d242f948969
+      internalID: -1517151262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emoji_Time
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 164
+        width: 162
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb50ba89b2369084c9fab9d1fd0e6e09
+      internalID: 1301207719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emoji_Coin
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 162
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe4e0866de9b1714184fab37f7a3078c
+      internalID: -353619468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Emoji_Cards
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 1
+        width: 162
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bed460bb9d8df78449125d8b515442bc
+      internalID: 1012417719
       vertices: []
       indices: 
       edges: []
@@ -157,7 +223,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 5855e64b84a251340a9d03c5db2ad162
     internalID: 0
     vertices: []
     indices: 
@@ -167,8 +233,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Left_Gradient: 1748781248
-      Right_Gradient: -1187006019
+      Emoji_Cards: 1012417719
+      Emoji_Coin: -353619468
+      Emoji_Diamond: -1299019971
+      Emoji_Emerald: -1517151262
+      Emoji_Time: 1301207719
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
