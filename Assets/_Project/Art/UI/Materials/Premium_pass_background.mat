@@ -37,12 +37,12 @@ Material:
     - _ColorMask: 15
     - _GlowCenterX: 0.5
     - _GlowCenterY: 0.5
-    - _GlowIntensity: 1.06
+    - _GlowIntensity: 1.513
     - _GlowSize: 0.4
     - _PatternAlpha: 0.3
-    - _PatternOpacity: 0.04
+    - _PatternOpacity: 0.12
     - _PatternRotation: 30
-    - _PatternScale: 2.65
+    - _PatternScale: 3
     - _ScrollAngle: 45
     - _ScrollSpeedX: 0.02
     - _ScrollSpeedY: 0.01
@@ -54,13 +54,13 @@ Material:
     - _TileX: 4
     - _TileY: 4
     - _VignetteSoftness: 0.01
-    - _VignetteStrength: 0.652
+    - _VignetteStrength: 0.55
     m_Colors:
-    - _Color: {r: 0.43529412, g: 0, b: 0.0886657, a: 1}
+    - _Color: {r: 0.4490565, g: 0.050187964, b: 0.039821967, a: 1}
     - _GlowCenter: {r: 0.5, g: 0.4, b: 0, a: 0}
-    - _GlowColor: {r: 0.6603774, g: 0.039193507, b: 0, a: 1}
-    - _PatternColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ScrollSpeed: {r: 0.01, g: -0.16, b: 0, a: 0}
+    - _GlowColor: {r: 0.5773585, g: 0.07432253, b: 0.042484805, a: 1}
+    - _PatternColor: {r: 1, g: 0.8584906, b: 0.8584906, a: 1}
+    - _ScrollSpeed: {r: 0.01, g: -0.12, b: 0, a: 0}
     - _Tiling: {r: 7.81, g: 6, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
