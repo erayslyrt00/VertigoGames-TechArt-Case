@@ -8,24 +8,28 @@ Shader "VertigoDemo/VFX/WindLines"
         [HDR] _LineColor ("Core Color", Color) = (1.977, 1.625, 0.31, 1)
         _Intensity ("Intensity", Range(0, 4)) = 1.3
 
-        _CoreThickness ("Core Thickness", Range(0, 1)) = 0.25
-        _EdgeSoftness ("Edge Softness", Range(0.01, 1)) = 0.4
-
-        _AuraScale ("Aura Scale Y", Float) = 2
+        [Header(Aura)]
+        _AuraScaleX ("Aura Scale X", Float) = 0.05
+        _AuraScaleY ("Aura Scale Y", Float) = 2
+        _AuraSpeed ("Aura Speed", Float) = 0.3
         _AuraStrength ("Aura Strength", Range(0, 1)) = 0.5
+        _AuraEdgeFade ("Aura Edge Fade", Range(0.001, 0.5)) = 0.2
 
-        _StreakScaleX ("Streak Scale X", Float) = 0.02
-        _StreakScaleY ("Streak Scale Y", Float) = 15
-        _StreakSpeed ("Streak Speed", Float) = 0.5
-        _StreakThreshold ("Streak Threshold", Range(0, 1)) = 0.5
-        _StreakSoftness ("Streak Softness", Range(0.01, 1.0)) = 0.1
+        [Header(Streak)]
+        _StreakScaleX ("Streak Scale X", Float) = 15.0
+        _StreakSpeed ("Streak Speed", Float) = 5.0
         _StreakIntensity ("Streak Intensity", Float) = 2.0
+        _StreakHeight ("Streak Max Height", Range(0.01, 1)) = 0.3
+        _StreakEdge ("Streak Vertical Softness", Range(0.001, 1)) = 0.1
+        _UVEdgeFade ("UV Edge Fade", Range(0.001, 0.5)) = 0.05
 
-        _StreakYPosition ("Streak Y Position", Range(0, 1)) = 0.4
-        _StreakSpread ("Streak Spread", Range(0.05, 1)) = 0.4
-        _StreakEdgeFade ("Streak Edge Fade", Range(0.001, 0.5)) = 0.12
+        _StreakDashSpread ("Dash Gap Spread", Range(0.0, 1.0)) = 0.5
+        _StreakDashSoftness ("Dash Gradient Softness", Range(0.01, 1.0)) = 0.3
+        _StreakDashMinThickness ("Dash Min Thickness Multiplier", Range(0.0, 1.0)) = 0.5
+        _StreakDashMinOpacity ("Dash Min Opacity", Range(0.0, 1.0)) = 0.25
 
-        _WaveAmount ("Wave Amount (object space)", Float) = 0.02
+        [Header(Ribbon)]
+        _WaveAmount ("Wave Amount (UV Space)", Float) = 0.05
         _WaveFreq ("Wave Frequency", Float) = 3
         _WaveSpeed ("Wave Speed", Float) = 1
 
@@ -52,7 +56,6 @@ Shader "VertigoDemo/VFX/WindLines"
             struct Attributes
             {
                 float4 positionOS : POSITION;
-                float3 normalOS : NORMAL;
                 float2 uv : TEXCOORD0;
             };
 
@@ -69,19 +72,21 @@ Shader "VertigoDemo/VFX/WindLines"
                 half4 _WindColor;
                 half4 _LineColor;
                 half _Intensity;
-                half _CoreThickness;
-                half _EdgeSoftness;
-                half _AuraScale;
+                half _AuraScaleX;
+                half _AuraScaleY;
+                half _AuraSpeed;
                 half _AuraStrength;
+                half _AuraEdgeFade;
                 half _StreakScaleX;
-                half _StreakScaleY;
                 half _StreakSpeed;
-                half _StreakThreshold;
-                half _StreakSoftness;
                 half _StreakIntensity;
-                half _StreakYPosition;
-                half _StreakSpread;
-                half _StreakEdgeFade;
+                half _StreakHeight;
+                half _StreakEdge;
+                half _UVEdgeFade;
+                half _StreakDashSpread;
+                half _StreakDashSoftness;
+                half _StreakDashMinThickness;
+                half _StreakDashMinOpacity;
                 half _WaveAmount;
                 half _WaveFreq;
                 half _WaveSpeed;
@@ -92,10 +97,7 @@ Shader "VertigoDemo/VFX/WindLines"
             Varyings vert (Attributes v)
             {
                 Varyings o;
-                // snake the ribbon as geometry so the noise UVs stay put (no jitter)
-                half wave = sin(v.uv.x * _WaveFreq - _Time.y * _WaveSpeed) * _WaveAmount;
-                float3 posOS = v.positionOS.xyz + v.normalOS * wave;
-                o.positionCS = TransformObjectToHClip(posOS);
+                o.positionCS = TransformObjectToHClip(v.positionOS.xyz);
                 o.uv = (half2)v.uv;
                 return o;
             }
@@ -103,29 +105,35 @@ Shader "VertigoDemo/VFX/WindLines"
             half4 frag (Varyings i) : SV_Target
             {
                 half along = i.uv.x;
-                half width = i.uv.y;
 
-                // shared flow so aura and streaks break at the same spots
-                float flowX = along * _StreakScaleX - _Time.y * _StreakSpeed;
+                // ribbon ripple, shifted on the V axis
+                half wave = sin(along * _WaveFreq - _Time.y * _WaveSpeed) * _WaveAmount;
+                half width = i.uv.y + wave;
 
-                half streakN = SAMPLE_TEXTURE2D(_NoiseTex, sampler_NoiseTex, float2(flowX, width * _StreakScaleY)).r;
-                half streak = smoothstep(_StreakThreshold, _StreakThreshold + _StreakSoftness, streakN);
+                // aura: soft scrolling glow, independent scale/speed, fills the band
+                float auraX = along * _AuraScaleX - _Time.y * _AuraSpeed;
+                half auraN = SAMPLE_TEXTURE2D(_NoiseTex, sampler_NoiseTex, float2(auraX, width * _AuraScaleY)).r;
+                half auraV = saturate(min(width, 1.0 - width) / _AuraEdgeFade);
+                half aura = auraN * _AuraStrength * auraV;
 
-                half auraN = SAMPLE_TEXTURE2D(_NoiseTex, sampler_NoiseTex, float2(flowX, width * _AuraScale)).r;
-                half aura = auraN * _AuraStrength;
+                // streak: continuous line whose height/opacity dip on the moving gaps
+                float dashWave = sin(along * _StreakScaleX - _Time.y * _StreakSpeed) * 0.5 + 0.5;
+                half dashMask = smoothstep(_StreakDashSpread, _StreakDashSpread + _StreakDashSoftness, dashWave);
 
-                half vBias = saturate((_StreakYPosition + _StreakSpread - width) / _StreakSpread);
-                half vFade = saturate(min(width, 1.0 - width) / _StreakEdgeFade);
+                half currentThickness = lerp(_StreakHeight * _StreakDashMinThickness, _StreakHeight, dashMask);
+                half currentOpacity = lerp(_StreakDashMinOpacity, 1.0, dashMask);
 
-                half flow = saturate((aura + streak * _StreakIntensity) * vBias * vFade);
+                half topCut = 1.0 - smoothstep(currentThickness - _StreakEdge, currentThickness, width);
+                half waveBottomCut = smoothstep(0.0, _UVEdgeFade, width);
+                // clamp to the raw UV so the wave can't bleed past the ribbon
+                half uvBounds = smoothstep(0.0, _UVEdgeFade, i.uv.y) * smoothstep(1.0, 1.0 - _UVEdgeFade, i.uv.y);
 
-                half dist = abs(width * 2.0 - 1.0);
-                half core = 1.0 - smoothstep(_CoreThickness, _CoreThickness + _EdgeSoftness, dist);
+                half streakShape = topCut * waveBottomCut * uvBounds;
+                half streak = streakShape * currentOpacity * _StreakIntensity;
 
                 half ends = smoothstep(0, _FadeIn, along) * smoothstep(0, _FadeOut, 1.0 - along);
 
-                half mask = flow * core * ends;
-
+                half mask = saturate(aura + streak) * ends;
                 half3 col = lerp(_WindColor.rgb, _LineColor.rgb, mask);
                 return half4(col, saturate(mask * _Intensity));
             }
