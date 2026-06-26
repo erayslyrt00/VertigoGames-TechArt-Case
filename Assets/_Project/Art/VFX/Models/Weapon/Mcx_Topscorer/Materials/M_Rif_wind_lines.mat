@@ -30,10 +30,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AuraScale: 0.5
-    - _AuraSpeed: 1
-    - _AuraStrength: 1
-    - _CoreThickness: 0.5
+    - _AuraEdgeFade: 0.3
+    - _AuraScale: 0.75
+    - _AuraScaleX: 1
+    - _AuraScaleY: 1
+    - _AuraSpeed: -0.35
+    - _AuraStrength: 0.1
+    - _CoreThickness: 0
     - _Desync: 0
     - _EdgeSoftness: 1
     - _EndFade: 2
@@ -42,31 +45,45 @@ Material:
     - _FlowFloor: 0
     - _FlowSharp: 1
     - _FlowTiling: 0.15
+    - _GapThickness: 0
+    - _GapWidth: 0.6
     - _GustDensity: 1
     - _GustFloor: 0.1
     - _GustSpeed: -0.75
-    - _Intensity: 1
+    - _Intensity: 4
     - _LineCount: 1
     - _LineSharpness: 2
+    - _StreakBottomFade: 0.05
+    - _StreakCount: 1
+    - _StreakDashMinOpacity: 0.5
+    - _StreakDashMinThickness: 0.65
+    - _StreakDashSoftness: 0.5
+    - _StreakDashSpread: 0
+    - _StreakEdge: 0.35
     - _StreakEdgeFade: 0.5
-    - _StreakIntensity: 3
-    - _StreakScaleX: 0.5
+    - _StreakFloor: 0
+    - _StreakHeight: 0.28
+    - _StreakIntensity: 0.5
+    - _StreakLength: 1
+    - _StreakScaleX: 8
     - _StreakScaleY: 1
     - _StreakSoftness: 1
-    - _StreakSpeed: -0.2
-    - _StreakSpread: 0.5
-    - _StreakThreshold: 0.2
+    - _StreakSpeed: -1.75
+    - _StreakSpread: 0.4
+    - _StreakTail: 1
+    - _StreakThreshold: 0.96
     - _StreakWidth: 0.2
-    - _StreakYPosition: 0.25
+    - _StreakYPosition: 0.758
     - _SwapUV: 1
-    - _WaveAmount: 0.1
+    - _UVEdgeFade: 0.05
+    - _WaveAmount: 0.075
     - _WaveFreq: 5
-    - _WaveSpeed: 2
+    - _WaveSpeed: 1
     - _WindSpeed: 0.75
     m_Colors:
     - _FlowAxis: {r: 1, g: 0, b: 0, a: 0}
     - _FlowDir: {r: 0, g: 0, b: 1, a: 0}
-    - _LineColor: {r: 2.9960783, g: 2.5937748, b: 0.5822566, a: 1}
-    - _WindColor: {r: 0.4113207, g: 0.3516986, b: 0.07062298, a: 1}
+    - _LineColor: {r: 4.237095, g: 3.76291, b: 1.3350844, a: 1}
+    - _WindColor: {r: 0.4566037, g: 0.3895799, b: 0.07839799, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
