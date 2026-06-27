@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class LevelProgressBar : MonoBehaviour
 {
     public Image fill;                // Progress_Fill (Filled, Horizontal, Left)
+    public Image gradientLeft;        // bright gradient, Filled Horizontal Left (start -> button)
+    public RectTransform gradientRight;     // faint gradient, Simple; left edge rides the button, right runs off-screen
+    public float gradientRightOvershoot = 800f; // how far past the bar's right the faint gradient extends
     public RectTransform bar;         // Progress_Bg
     public RectTransform buyButton;
     public Button buyButtonComponent;
@@ -192,6 +195,22 @@ public class LevelProgressBar : MonoBehaviour
         Vector3 bp = buyButton.position;
         bp.x = worldX;
         buyButton.position = bp;
+
+        // left gradient fills up to the button
+        if (gradientLeft != null) gradientLeft.fillAmount = fill.fillAmount;
+
+        // right gradient: left edge at the button, right edge pushed off-screen
+        if (gradientRight != null)
+        {
+            RectTransform p = gradientRight.parent as RectTransform;
+            if (p != null)
+            {
+                float localX = p.InverseTransformPoint(new Vector3(worldX, 0f, 0f)).x;
+                float parentLeft = -p.rect.width * p.pivot.x;
+                gradientRight.offsetMin = new Vector2(localX - parentLeft, gradientRight.offsetMin.y);
+                gradientRight.offsetMax = new Vector2(gradientRightOvershoot, gradientRight.offsetMax.y);
+            }
+        }
     }
 
     void LateUpdate()

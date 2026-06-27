@@ -54,11 +54,11 @@ Material:
     - _TileX: 4
     - _TileY: 4
     - _VignetteSoftness: 0.01
-    - _VignetteStrength: 0.55
+    - _VignetteStrength: 0.709
     m_Colors:
-    - _Color: {r: 0.4490565, g: 0.050187964, b: 0.039821967, a: 1}
+    - _Color: {r: 0.4339623, g: 0.012398922, b: 0, a: 1}
     - _GlowCenter: {r: 0.5, g: 0.4, b: 0, a: 0}
-    - _GlowColor: {r: 0.5773585, g: 0.07432253, b: 0.042484805, a: 1}
+    - _GlowColor: {r: 0.5169811, g: 0.07355934, b: 0.04584547, a: 1}
     - _PatternColor: {r: 1, g: 0.8584906, b: 0.8584906, a: 1}
     - _ScrollSpeed: {r: 0.01, g: -0.12, b: 0, a: 0}
     - _Tiling: {r: 7.81, g: 6, b: 0, a: 0}

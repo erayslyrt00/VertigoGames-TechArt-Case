@@ -20,6 +20,11 @@ public class BattlePassNode : MonoBehaviour, IPointerClickHandler
     public Image iconImage;
     public string displayName;
 
+    [Header("Currency collect")]
+    public bool rewardIsCurrency;
+    public Sprite collectIcon;             // icon that flies (e.g. single coin); falls back to the reward icon
+    public RectTransform currencyTarget;   // label the icons fly to (lucky draw -> generic currency label)
+
     [Header("Backgrounds")]
     public GameObject rarityBg;
     public GameObject claimableVisual;
@@ -29,6 +34,12 @@ public class BattlePassNode : MonoBehaviour, IPointerClickHandler
     public GameObject lockedVisual;
     public GameObject redDot;
     public GameObject shine;
+
+    [Header("Shine tint")]
+    public Color shineClaimable = new Color(0.965f, 1f, 0.24f, 0.686f);
+    public Color shineDimmed = new Color(1f, 1f, 1f, 0.30f);
+    Image shineGraphic;
+    public GameObject centerGlow;
 
     [Header("Claim pop")]
     public float popScale = 1.15f;
@@ -135,6 +146,12 @@ public class BattlePassNode : MonoBehaviour, IPointerClickHandler
         if (popRoutine != null) StopCoroutine(popRoutine);
         if (claimedVisual != null) popRoutine = StartCoroutine(Pop(claimedVisual.transform, 0f));
         else popRoutine = StartCoroutine(Pop(transform, 1f));
+
+        if (rewardIsCurrency && CurrencyCollectFx.Instance != null)
+        {
+            Sprite flyIcon = collectIcon != null ? collectIcon : (iconImage != null ? iconImage.sprite : null);
+            if (flyIcon != null) CurrencyCollectFx.Instance.Play(flyIcon, currencyTarget);
+        }
     }
 
     IEnumerator Pop(Transform t, float from)
@@ -172,7 +189,18 @@ public class BattlePassNode : MonoBehaviour, IPointerClickHandler
 
         if (lockedVisual != null) lockedVisual.SetActive(state == State.Locked || premiumLock);
         if (redDot != null) redDot.SetActive(state == State.Claimable);
-        if (shine != null) shine.SetActive(state == State.Claimable);
+
+        // shine sweeps on every card; only its tint/opacity changes with state
+        if (shine != null)
+        {
+            shine.SetActive(true);
+            if (shineGraphic == null) shineGraphic = shine.GetComponent<Image>();
+            if (shineGraphic != null)
+                shineGraphic.color = state == State.Claimable ? shineClaimable : shineDimmed;
+        }
+
+        // bright center glow only on claimable cards
+        if (centerGlow != null) centerGlow.SetActive(state == State.Claimable);
     }
 
 #if UNITY_EDITOR

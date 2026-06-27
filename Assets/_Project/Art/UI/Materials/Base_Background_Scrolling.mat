@@ -37,10 +37,10 @@ Material:
     - _ColorMask: 15
     - _GlowCenterX: 0.5
     - _GlowCenterY: 0.5
-    - _GlowIntensity: 1.5
-    - _GlowSize: 0.6
+    - _GlowIntensity: 0
+    - _GlowSize: 0.45
     - _PatternAlpha: 0.3
-    - _PatternOpacity: 0.055
+    - _PatternOpacity: 0.03
     - _PatternRotation: 20
     - _PatternScale: 2.65
     - _ScrollAngle: 45
@@ -54,11 +54,11 @@ Material:
     - _TileX: 4
     - _TileY: 4
     - _VignetteSoftness: 0.01
-    - _VignetteStrength: 0.395
+    - _VignetteStrength: 0.635
     m_Colors:
-    - _Color: {r: 0.2383334, g: 0, b: 0.65, a: 1}
+    - _Color: {r: 0.236013, g: 0, b: 0.6156863, a: 1}
     - _GlowCenter: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _GlowColor: {r: 0.046331264, g: 0, b: 0.4490565, a: 1}
+    - _GlowColor: {r: 0.07256891, g: 0, b: 0.2830189, a: 1}
     - _PatternColor: {r: 1, g: 1, b: 1, a: 1}
     - _ScrollSpeed: {r: -0.25, g: -0.25, b: 0, a: 0}
     - _Tiling: {r: 7.81, g: 6, b: 0, a: 0}
