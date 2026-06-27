@@ -54,9 +54,9 @@ Material:
     - _TileX: 4
     - _TileY: 4
     - _VignetteSoftness: 0.01
-    - _VignetteStrength: 0.635
+    - _VignetteStrength: 0.5
     m_Colors:
-    - _Color: {r: 0.236013, g: 0, b: 0.6156863, a: 1}
+    - _Color: {r: 0.269679, g: 0, b: 0.7056604, a: 1}
     - _GlowCenter: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _GlowColor: {r: 0.07256891, g: 0, b: 0.2830189, a: 1}
     - _PatternColor: {r: 1, g: 1, b: 1, a: 1}

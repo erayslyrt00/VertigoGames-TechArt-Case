@@ -37,7 +37,8 @@ public class CurrencyCollectFx : MonoBehaviour
     {
         if (holder != null) return holder;
 
-        var go = new GameObject("CurrencyCollectFx_Holder", typeof(RectTransform), typeof(Canvas));
+        var go = new GameObject("CurrencyCollectFx_Holder",
+            typeof(RectTransform), typeof(Canvas), typeof(CanvasGroup), typeof(LayoutElement));
         holder = (RectTransform)go.transform;
         holder.SetParent(canvasRect, false);
         holder.anchorMin = Vector2.zero;
@@ -48,6 +49,12 @@ public class CurrencyCollectFx : MonoBehaviour
         var c = go.GetComponent<Canvas>();
         c.overrideSorting = true;
         c.sortingOrder = sortingOrder;
+
+        // never intercept input, never take part in a parent layout group
+        var cg = go.GetComponent<CanvasGroup>();
+        cg.blocksRaycasts = false;
+        cg.interactable = false;
+        go.GetComponent<LayoutElement>().ignoreLayout = true;
         return holder;
     }
 

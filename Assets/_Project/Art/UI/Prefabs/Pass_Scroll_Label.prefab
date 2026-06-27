@@ -998,6 +998,9 @@ MonoBehaviour:
   isValuable: 0
   iconImage: {fileID: 4995778387819057832}
   displayName: 
+  rewardIsCurrency: 0
+  collectIcon: {fileID: 0}
+  currencyTarget: {fileID: 0}
   rarityBg: {fileID: 2285548942821999334}
   claimableVisual: {fileID: 6825066787893358636}
   claimedVisual: {fileID: 6238145389602457959}
@@ -1570,7 +1573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2099,6 +2102,9 @@ MonoBehaviour:
   isValuable: 0
   iconImage: {fileID: 1240849975272321390}
   displayName: 
+  rewardIsCurrency: 0
+  collectIcon: {fileID: 0}
+  currencyTarget: {fileID: 0}
   rarityBg: {fileID: 2109614221399219533}
   claimableVisual: {fileID: 5890172440841456841}
   claimedVisual: {fileID: 8630781948723134305}
@@ -2826,7 +2832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
